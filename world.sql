@@ -11,11 +11,29 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 01/08/2018 12:12:21
+ Date: 01/08/2018 14:01:28
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for Author
+-- ----------------------------
+DROP TABLE IF EXISTS `Author`;
+CREATE TABLE `Author` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of Author
+-- ----------------------------
+BEGIN;
+INSERT INTO `Author` VALUES (1, 'yanming', 'yanming@leha.com');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for Blog
@@ -24,6 +42,7 @@ DROP TABLE IF EXISTS `Blog`;
 CREATE TABLE `Blog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(215) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -31,7 +50,27 @@ CREATE TABLE `Blog` (
 -- Records of Blog
 -- ----------------------------
 BEGIN;
-INSERT INTO `Blog` VALUES (1, 'it');
+INSERT INTO `Blog` VALUES (1, 'it', 1);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for Comment
+-- ----------------------------
+DROP TABLE IF EXISTS `Comment`;
+CREATE TABLE `Comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of Comment
+-- ----------------------------
+BEGIN;
+INSERT INTO `Comment` VALUES (1, 1, 'annoymons', 'hello,world');
+INSERT INTO `Comment` VALUES (2, 2, 'yayay', 'no comment.');
 COMMIT;
 
 -- ----------------------------
@@ -42,7 +81,11 @@ CREATE TABLE `Post` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `blog_id` int(11) DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
-  `body` longtext,
+  `body` text,
+  `author_id` int(11) DEFAULT NULL,
+  `created_on` timestamp NULL DEFAULT NULL,
+  `section` varchar(200) DEFAULT NULL,
+  `draft` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -50,11 +93,46 @@ CREATE TABLE `Post` (
 -- Records of Post
 -- ----------------------------
 BEGIN;
-INSERT INTO `Post` VALUES (1, 1, 'language', 'php');
-INSERT INTO `Post` VALUES (2, 1, 'language', 'js');
-INSERT INTO `Post` VALUES (3, 1, 'language', 'css');
-INSERT INTO `Post` VALUES (4, 1, 'language', 'java');
-INSERT INTO `Post` VALUES (5, 1, 'language', 'kotlin');
+INSERT INTO `Post` VALUES (1, 1, 'language', 'php', 1, '2018-08-01 12:18:26', NULL, NULL);
+INSERT INTO `Post` VALUES (2, 1, 'language', 'js', 1, '2018-08-01 12:18:29', NULL, NULL);
+INSERT INTO `Post` VALUES (3, 1, 'language', 'css', 1, '2018-08-01 12:18:31', NULL, NULL);
+INSERT INTO `Post` VALUES (4, 1, 'language', 'java', 1, '2018-08-01 12:18:35', NULL, NULL);
+INSERT INTO `Post` VALUES (5, 1, 'language', 'kotlin', 1, '2018-08-01 12:18:37', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for Post_Tag
+-- ----------------------------
+DROP TABLE IF EXISTS `Post_Tag`;
+CREATE TABLE `Post_Tag` (
+  `tag_id` int(11) DEFAULT NULL,
+  `post_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of Post_Tag
+-- ----------------------------
+BEGIN;
+INSERT INTO `Post_Tag` VALUES (1, 1);
+INSERT INTO `Post_Tag` VALUES (2, 2);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for Tag
+-- ----------------------------
+DROP TABLE IF EXISTS `Tag`;
+CREATE TABLE `Tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of Tag
+-- ----------------------------
+BEGIN;
+INSERT INTO `Tag` VALUES (1, 'language');
+INSERT INTO `Tag` VALUES (2, 'linux');
 COMMIT;
 
 -- ----------------------------

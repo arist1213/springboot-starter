@@ -8,11 +8,11 @@ import java.util.List;
  * created by yanming on 2018/8/1
  */
 @Data
-public class Post {
+public class BlogDetails {
+
     private Integer id;
-    private String subject;
-    private String body;
+    private String title;
     private Author author;
-    private List<Comment> comments;
-    private List<Tag> tags;
+    private List<Post> posts;
+
 }

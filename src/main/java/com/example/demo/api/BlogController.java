@@ -23,4 +23,10 @@ public class BlogController extends BaseController {
     private JsonApiResult getBlogById(@PathVariable Integer id) {
         return jsonSuccess(blogMapper.selectBlog(id));
     }
+
+    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET, produces = {"application/json; charset=utf-8"})
+    @ResponseBody
+    private JsonApiResult getBlogDetail(@PathVariable Integer id) {
+        return jsonSuccess(blogMapper.selectBlogDetails(id));
+    }
 }
