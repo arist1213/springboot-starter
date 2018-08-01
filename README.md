@@ -45,9 +45,10 @@ mybatis.config-location=classpath:mybatis/mybatis-config.xml
 
 ##相关链接 
 
-[spring-boot](https://spring.io/projects/spring-boot)
-[maven](https://maven.apache.org/users/index.html)
-[mybatis](http://www.mybatis.org/mybatis-3/zh/index.html)
+1. [spring-boot](https://spring.io/projects/spring-boot)
+2. [maven](https://maven.apache.org/users/index.html)
+3. [mybatis](http://www.mybatis.org/mybatis-3/zh/index.html)
+4. [spring-boot-mybatis](http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
 
 ### 后续改进
 把项目打包成一个 [archetype](https://maven.apache.org/guides/mini/guide-creating-archetypes.html)安装到本地（或者推送到maven社区），每次开始新项目，重新使用这个模板生成一个。

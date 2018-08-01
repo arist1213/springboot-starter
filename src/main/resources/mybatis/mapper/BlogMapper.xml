@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.model.dao.BlogMapper" >
+
+    <resultMap id="blogResult" type="com.example.demo.model.vo.Blog">
+        <id property="id" column="blog_id" />
+        <result property="title" column="blog_title"/>
+        <collection property="posts" ofType="com.example.demo.model.vo.Post">
+            <id property="id" column="post_id"/>
+            <result property="subject" column="post_subject"/>
+            <result property="body" column="post_body"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectBlog" resultMap="blogResult">
+        select
+        B.id as blog_id,
+        B.title as blog_title,
+        P.id as post_id,
+        P.subject as post_subject,
+        P.body as post_body
+        from Blog B
+        left outer join Post P on B.id = P.blog_id
+        where B.id = #{id}
+    </select>
+
+</mapper>
